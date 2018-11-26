@@ -1,13 +1,13 @@
 import * as React from 'react';
-import NavBar from './components/NavBar';
-import Home from './components/Home';
-import Login from './components/Login';
-import All from './components/All';
+
+import { All, NavBar, Home, Login, Loader } from './components';
+
 import Admin from './components/admin/Admin';
-import Loader from './components/Loader';
+import DevTools from 'mobx-react-devtools';
 
 import ViewStore from './stores/ViewStore';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { observer } from 'mobx-react';
 
 interface AppProps {
   viewStore: ViewStore;
@@ -15,9 +15,16 @@ interface AppProps {
 
 interface AppState {}
 
+@observer
 class App extends React.Component<AppProps, AppState> {
   constructor(props) {
     super(props);
+  }
+  
+  componentDidMount() {
+    const { viewStore } = this.props;
+
+    viewStore.firebaseCheckAuth();
   }
 
   render() {
@@ -26,12 +33,12 @@ class App extends React.Component<AppProps, AppState> {
 
     return (
       <div className={`${isLoading && 'is-loading'}`}>
-        {/* NavBar - do I need to include the ending tag? :) */}
+        {<DevTools />}
         {isLoading ? (
           <Loader />
         ) : (
           <div>
-            <NavBar />
+            <NavBar viewStore={viewStore} />
 
             <div className="container-fluid">
               <div className="row">
@@ -61,4 +68,4 @@ class App extends React.Component<AppProps, AppState> {
   }
 }
 
-export default App;
+export default withRouter(App);

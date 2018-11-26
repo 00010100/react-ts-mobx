@@ -1,10 +1,11 @@
 import { firebaseAuth } from '../utils/firebase';
+import { observable } from 'mobx';
 
 class ViewStore {
-  authed: boolean = false;
-  isLoading: boolean = false;
-  user: any = null;
-  errorMessage: string = '';
+  @observable authed: boolean = false;
+  @observable isLoading: boolean = true;
+  @observable user: any = null;
+  @observable errorMessage: string = '';
 
   firebaseCheckAuth = () => {
     firebaseAuth().onAuthStateChanged((user) => {
@@ -21,6 +22,14 @@ class ViewStore {
       }
     });
   };
+
+  logError = (error) => {
+    this.errorMessage = error;
+  }
+  
+  addPlayer = (playerName: string) => {
+    console.log(playerName)
+  }
 }
 
 export default ViewStore;

@@ -1,8 +1,6 @@
 import * as React from 'react';
 
-import ManagePlayers from './ManagePlayers';
-import ManageHeadToHeads from './ManageHeadToHeads';
-import ManageGames from './ManageGames';
+import { ManagePlayers, ManageHeadToHeads, ManageGames } from './';
 
 class Admin extends React.Component<any, any> {
     render() {
@@ -10,8 +8,6 @@ class Admin extends React.Component<any, any> {
             <div className="col-sm-8">
                 
                 <ManagePlayers />
-                <ManageHeadToHeads />
-                <ManageGames />
                 
             </div>
         );
