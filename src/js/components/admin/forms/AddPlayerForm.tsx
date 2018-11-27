@@ -11,7 +11,7 @@ interface AddPlayerFormState {
 }
 
 @inject('viewStore')
-@observer 
+@observer
 class AddPlayerForm extends React.Component<AddPlayerFormProps, AddPlayerFormState> {
   constructor(props) {
     super(props);
@@ -24,9 +24,7 @@ class AddPlayerForm extends React.Component<AddPlayerFormProps, AddPlayerFormSta
   handleInputChange = (e) => {
     const { name, value } = e.target;
 
-    this.setState({
-      [name]: value,
-    });
+    this.setState({ [name]: value });
   };
 
   handleSubmit = (e) => {
